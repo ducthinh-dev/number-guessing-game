@@ -7,7 +7,7 @@ class numberGuessGame:
         self.number  = random.randint(self.low, self.high)
         self.attempt = 0
 
-    def mainGame(self):
+    def playGame(self):
         guessNumber = int(input(f'Hãy đoán 1 số từ {self.low} đến {self.high}: '))
         self.attempt += 1
         while guessNumber != self.number:
