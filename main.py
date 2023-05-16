@@ -1,6 +1,11 @@
 import os
 from random import randint
 
+if os.name == "nt":
+    clearCommand = 'cls'
+else:
+    clearCommand = 'clear'
+
 #============================ FUNC ============================
 def spaceFill(value, space):
     value = str(value)
@@ -33,7 +38,7 @@ def playGame(maxAttempt = DEFAULT_MAX_ATTEMPT):
         print(f'Lần đoán thứ {attempt}.')
         guessNumber = int(input(f'Hãy đoán lại nào: '))
     if guessNumber == number:
-        os.system('cls')
+        os.system(clearCommand)
         print(f'Chúc mừng! Số {guessNumber} là dự đoán chính xác!')
     return number, attempt
 
@@ -98,10 +103,10 @@ def printSetting():
 
 #============================ MAIN ============================
 if __name__ == '__main__':
-    os.system('cls')
+    os.system(clearCommand)
     scores = []
     cursor = printMainMenu()
-    os.system('cls')
+    os.system(clearCommand)
     while cursor != 0:
         if cursor == 1:
             thisNumber, thisAttempt = playGame()
@@ -110,12 +115,12 @@ if __name__ == '__main__':
             else:
                 scores.append([thisNumber, thisAttempt])
             cursor = printGameOverMenu()
-            os.system('cls')
+            os.system(clearCommand)
         if cursor == 2:
             cursor = printScoreBoard(scores)
-            os.system('cls')
+            os.system(clearCommand)
         if cursor == 3:
             pass
         if cursor == 4:
             cursor = printMainMenu()
-            os.system('cls')
+            os.system(clearCommand)
