@@ -35,7 +35,9 @@ def playGame(low_number = LOW_NUMBER, high_number = HIGH_NUMBER, maxAttempt = DE
             print('Bạn đoán cao quá rồi')
         attempt += 1
         if attempt > maxAttempt:
+            os.system(clearCommand)
             print(f'Game over! Bạn đã sử dụng quá lượt đoán!')
+            print(f'Đáp án chính xác là {number}.')
             return number, -1
         print(f'Lần đoán thứ {attempt}.')
         guessNumber = int(input(f'Hãy đoán lại nào: '))
@@ -58,6 +60,7 @@ def printMainMenu(playerName = 'Ẩn danh'):
     return userChoice
 
 def printGameOverMenu():
+    print('\n')
     print('+-------GAME CLEARED------+')
     print('|Nhập 1 để chơi lại       |')
     print('|Nhập 2 để xem bảng điểm  |')
