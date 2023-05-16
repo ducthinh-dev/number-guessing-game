@@ -16,18 +16,24 @@ def spaceFill(value, space):
 #============================ MENU ============================
 LOW_NUMBER  = 0
 HIGH_NUMBER = 100
-def playGame():
+DEFAULT_MAX_ATTEMPT = 1
+def playGame(maxAttempt = DEFAULT_MAX_ATTEMPT):
     number = randint(LOW_NUMBER, HIGH_NUMBER)
-    guessNumber = int(input(f'Hãy đoán 1 số từ {LOW_NUMBER} đến {HIGH_NUMBER}: '))
     attempt = 1
+    guessNumber = int(input(f'Hãy đoán 1 số từ {LOW_NUMBER} đến {HIGH_NUMBER}: '))
     while guessNumber != number:
         if guessNumber < number:
             print('Số của bạn quá thấp!')
         else:
             print('Bạn đoán cao quá rồi')
-        guessNumber = int(input(f'Hãy đoán lại nào: '))
         attempt += 1
+        if attempt > maxAttempt:
+            print(f'Game over! Bạn đã sử dụng quá lượt đoán!')
+            return number, -1
+        print(f'Lần đoán thứ {attempt}.')
+        guessNumber = int(input(f'Hãy đoán lại nào: '))
     if guessNumber == number:
+        os.system('cls')
         print(f'Chúc mừng! Số {guessNumber} là dự đoán chính xác!')
     return number, attempt
 
@@ -45,19 +51,21 @@ def printMainMenu(playerName = 'Ẩn danh'):
             print(playerName[index],end='')
         else:
             print(' ',end='')
-    print('+----------MENU-----------+')
+    print('+-------------------------+')
     print('|Nhập 1 để chơi           |')
     print('|Nhập 2 để xem bảng điểm  |')
+    print('|Nhập 3 để cài đặt        |')
     print('|Nhập 0 để thoát          |')
     print('+-------------------------+')
     userChoice = int(input(f'>Nhập lựa chọn: '))
     return userChoice
 
 def printGameOverMenu():
-    print('+-------GAME CLEAR--------+')
+    print('+-------GAME CLEARED------+')
     print('|Nhập 1 để chơi lại       |')
     print('|Nhập 2 để xem bảng điểm  |')
-    print('|Nhập 3 để trở lại menu   |')
+    print('|Nhập 3 để cài đặt        |')
+    print('|Nhập 4 để trở lại menu   |')
     print('|Nhập 0 để thoát          |')
     print('+-------------------------+')
     userChoice = int(input(f'>Nhập lựa chọn: '))
@@ -71,12 +79,19 @@ def printScoreBoard(scores):
         
     print('+---+----SCORE BOARD------+')
     print('|   |Đáp án|Số lần đoán   |')
+    print('+---+---------------------+')
     for record in records:
         print(record)
     print('+---+---------------------+')
     print('+-------------------------+')
     print('|Nhập 3 để trở lại menu   |')
     print('|Nhập 0 để thoát          |')
+    print('+-------------------------+')
+    userChoice = int(input(f'>Nhập lựa chọn: '))
+    return userChoice
+
+def printSetting():
+    print('+---------SETTING---------+')
     print('+-------------------------+')
     userChoice = int(input(f'>Nhập lựa chọn: '))
     return userChoice
@@ -90,12 +105,17 @@ if __name__ == '__main__':
     while cursor != 0:
         if cursor == 1:
             thisNumber, thisAttempt = playGame()
-            scores.append([thisNumber, thisAttempt])
+            if thisAttempt == -1:
+                scores.append([thisNumber, 'Lost'])
+            else:
+                scores.append([thisNumber, thisAttempt])
             cursor = printGameOverMenu()
             os.system('cls')
         if cursor == 2:
             cursor = printScoreBoard(scores)
             os.system('cls')
         if cursor == 3:
+            pass
+        if cursor == 4:
             cursor = printMainMenu()
             os.system('cls')
