@@ -16,7 +16,7 @@ def spaceFill(value, space):
 #============================ MENU ============================
 LOW_NUMBER  = 0
 HIGH_NUMBER = 100
-DEFAULT_MAX_ATTEMPT = 1
+DEFAULT_MAX_ATTEMPT = 1000
 def playGame(maxAttempt = DEFAULT_MAX_ATTEMPT):
     number = randint(LOW_NUMBER, HIGH_NUMBER)
     attempt = 1
