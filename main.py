@@ -29,6 +29,7 @@ def playGame(low_number = LOW_NUMBER, high_number = HIGH_NUMBER, maxAttempt = DE
     print(f'Bạn có {maxAttempt} lần đoán!')
     guessNumber = int(input(f'Hãy đoán 1 số từ {low_number} đến {high_number}: '))
     while guessNumber != number:
+        os.system(clearCommand)
         if guessNumber < number:
             print('Số của bạn quá thấp!')
         else:
@@ -38,13 +39,13 @@ def playGame(low_number = LOW_NUMBER, high_number = HIGH_NUMBER, maxAttempt = DE
             os.system(clearCommand)
             print(f'Game over!\nBạn đã sử dụng quá lượt đoán!')
             print(f'Đáp án chính xác là {number}.')
-            return number, -1
+            return number, attempt, False
         print(f'Lần đoán thứ {attempt}.')
         guessNumber = int(input(f'Hãy đoán lại nào: '))
     if guessNumber == number:
         os.system(clearCommand)
         print(f'Chúc mừng! Số {guessNumber} là dự đoán chính xác!')
-    return number, attempt
+    return number, attempt, True
 
 #============================ GAME ============================
 def printMainMenu(playerName = 'Ẩn danh'):
@@ -93,7 +94,7 @@ def printScoreBoard(scores):
     userChoice = int(input(f'>Nhập lựa chọn: '))
     return userChoice
 
-def printSettings(low_number, high_number, default_max_attempt):
+def printSettings(low_number, high_number, max_attempt):
     userChoice = -1
     while userChoice in [-1, 1, 2]:
         if userChoice == -1:
@@ -120,18 +121,18 @@ def printSettings(low_number, high_number, default_max_attempt):
             flag = False
             while temp <= 0:
                 print('+---------SETTINGS--------+')
-                print(f'|Số lần đoán: {spaceFill(default_max_attempt, 12)}|')
+                print(f'|Số lần đoán: {spaceFill(max_attempt, 12)}|')
                 print('+-------------------------+')
                 if flag:
                     print('Số lần đoán phải lớn hơn 0!')
                 flag = True
                 temp = int(input(f'>Nhập số lần đoán: '))
                 os.system(clearCommand)
-            default_max_attempt = temp
+            max_attempt = temp
             userChoice = -1
             os.system(clearCommand)
         userChoice = 5
-    return userChoice, low_number, high_number, default_max_attempt
+    return userChoice, low_number, high_number, max_attempt
 
 def printUserManual():
     print('+---------MANUAL----------+')
@@ -157,7 +158,7 @@ def printUserManual():
 if __name__ == '__main__':
     low_number  = LOW_NUMBER
     high_number = HIGH_NUMBER
-    default_max_attempt = DEFAULT_MAX_ATTEMPT
+    max_attempt = DEFAULT_MAX_ATTEMPT
     os.system(clearCommand)
     scores = []
     playerName = input('Xin chào! Bạn tên là gì? ')
@@ -166,9 +167,9 @@ if __name__ == '__main__':
     os.system(clearCommand)
     while cursor != 0:
         if cursor == 1:
-            thisNumber, thisAttempt = playGame(low_number, high_number, default_max_attempt)
-            if thisAttempt == -1:
-                scores.append([thisNumber, 'Lost'])
+            thisNumber, thisAttempt, isWon = playGame(low_number, high_number, max_attempt)
+            if not isWon:
+                scores.append([thisNumber, f'{thisAttempt}(Thua)'])
             else:
                 scores.append([thisNumber, thisAttempt])
             cursor = printGameOverMenu()
@@ -177,11 +178,14 @@ if __name__ == '__main__':
             cursor = printScoreBoard(scores)
             os.system(clearCommand)
         if cursor == 3:
-            cursor, low_number, high_number, default_max_attempt = printSettings(low_number, high_number, default_max_attempt)
+            cursor, low_number, high_number, max_attempt = printSettings(low_number, high_number, max_attempt)
             os.system(clearCommand)
         if cursor == 4:
             cursor = printUserManual()
             os.system(clearCommand)
         if cursor == 5:
             cursor = printMainMenu(playerName)
+            os.system(clearCommand)
+        if not cursor in [0,1,2,3,4,5]:
+            cursor = 5
             os.system(clearCommand)
