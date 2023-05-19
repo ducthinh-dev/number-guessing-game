@@ -102,6 +102,7 @@ def printSettings(low_number, high_number, max_attempt):
             print('|Nhập 1 để cài đặt giá trị|')
             print('|Nhập 2 để cài đặt số lần |')
             print('|đoán                     |')
+            print('|Nhập 0 để thoát trò chơi |')
             print('|Nhập phím khác để trở lại|')
             print('|menu                     |')
             print('+-------------------------+')
@@ -135,7 +136,7 @@ def printSettings(low_number, high_number, max_attempt):
 
 def printUserManual(playerName = 'Ẩn danh'):
     print('+-------------------------+')
-    print(f'|Xin chào,{spaceFill(playerName, 16)}|')
+    print(f'|Xin chào, {spaceFill(playerName, 15)}|')
     print('+-------------------------+')
     print('+---------MANUAL----------+')
     print('|Trong trò chơi, bạn sẽ có|')
@@ -152,6 +153,7 @@ def printUserManual(playerName = 'Ẩn danh'):
     print('|Nhập 1 để chơi           |')
     print('|Nhập 2 để xem bảng điểm  |')
     print('|Nhập 3 để cài đặt        |')
+    print('|Nhập 0 để thoát trò chơi |')
     print('+-------------------------+')
     userChoice = int(input('>Nhập lựa chọn: '))
     return userChoice
@@ -163,7 +165,9 @@ if __name__ == '__main__':
     max_attempt = DEFAULT_MAX_ATTEMPT
     os.system(clearCommand)
     scores = []
-    playerName = input('Xin chào! Bạn tên là gì? ')
+    print('___-=* TRÒ CHƠI ĐOÁN SỐ *=-___')
+    print('Chào mừng tới trò chơi!')
+    playerName = input('Bạn tên là gì? ')
     os.system(clearCommand)
     cursor = printUserManual(playerName)
     os.system(clearCommand)
