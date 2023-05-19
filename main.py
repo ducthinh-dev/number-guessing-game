@@ -39,12 +39,11 @@ def playGame(low_number = DEFAULT_LOW_NUMBER, high_number = DEFAULT_HIGH_NUMBER,
             os.system(clearCommand)
             print(f'Game over!\nBạn đã sử dụng quá lượt đoán!')
             print(f'Đáp án chính xác là {number}.')
-            return number, attempt, False
+            return number, maxAttempt, False
         print(f'Lần đoán thứ {attempt}.')
         guessNumber = int(input(f'Hãy đoán lại nào: '))
-    if guessNumber == number:
-        os.system(clearCommand)
-        print(f'Chúc mừng! Số {guessNumber} là dự đoán chính xác!')
+    os.system(clearCommand)
+    print(f'Chúc mừng! Số {guessNumber} là dự đoán chính xác!')
     return number, attempt, True
 
 #============================ GAME ============================
