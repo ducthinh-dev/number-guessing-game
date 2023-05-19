@@ -7,8 +7,8 @@ else:
     clearCommand = 'clear'
 
 
-LOW_NUMBER = 0
-HIGH_NUMBER = 100
+DEFAULT_LOW_NUMBER = 0
+DEFAULT_HIGH_NUMBER = 100
 DEFAULT_MAX_ATTEMPT = 5
 #============================ FUNC ============================
 def spaceFill(value, space):
@@ -23,7 +23,7 @@ def spaceFill(value, space):
     return result
 
 #============================ MENU ============================
-def playGame(low_number = LOW_NUMBER, high_number = HIGH_NUMBER, maxAttempt = DEFAULT_MAX_ATTEMPT):
+def playGame(low_number = DEFAULT_LOW_NUMBER, high_number = DEFAULT_HIGH_NUMBER, maxAttempt = DEFAULT_MAX_ATTEMPT):
     number = randint(low_number, high_number)
     attempt = 1
     print(f'Bạn có {maxAttempt} lần đoán!')
@@ -131,7 +131,6 @@ def printSettings(low_number, high_number, max_attempt):
             max_attempt = temp
             userChoice = -1
             os.system(clearCommand)
-        userChoice = 5
     return userChoice, low_number, high_number, max_attempt
 
 def printUserManual():
@@ -156,8 +155,8 @@ def printUserManual():
 
 #============================ MAIN ============================
 if __name__ == '__main__':
-    low_number  = LOW_NUMBER
-    high_number = HIGH_NUMBER
+    low_number  = DEFAULT_LOW_NUMBER
+    high_number = DEFAULT_HIGH_NUMBER
     max_attempt = DEFAULT_MAX_ATTEMPT
     os.system(clearCommand)
     scores = []
