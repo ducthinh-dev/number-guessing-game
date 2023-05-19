@@ -186,7 +186,7 @@ if __name__ == '__main__':
             cursor, low_number, high_number, max_attempt = printSettings(low_number, high_number, max_attempt)
             os.system(clearCommand)
         if cursor == 4:
-            cursor = printUserManual()
+            cursor = printUserManual(playerName)
             os.system(clearCommand)
         if cursor == 5:
             cursor = printMainMenu(playerName)
