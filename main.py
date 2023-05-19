@@ -133,7 +133,10 @@ def printSettings(low_number, high_number, max_attempt):
             os.system(clearCommand)
     return userChoice, low_number, high_number, max_attempt
 
-def printUserManual():
+def printUserManual(playerName = 'Ẩn danh'):
+    print('+-------------------------+')
+    print(f'|Xin chào,{spaceFill(playerName, 16)}|')
+    print('+-------------------------+')
     print('+---------MANUAL----------+')
     print('|Trong trò chơi, bạn sẽ có|')
     print('|số lượt đoán nhất định.  |')
@@ -162,7 +165,7 @@ if __name__ == '__main__':
     scores = []
     playerName = input('Xin chào! Bạn tên là gì? ')
     os.system(clearCommand)
-    cursor = printUserManual()
+    cursor = printUserManual(playerName)
     os.system(clearCommand)
     while cursor != 0:
         if cursor == 1:
